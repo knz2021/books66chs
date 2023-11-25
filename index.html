@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f0f0f0;
+    }
+
+    .card {
+      width: 80px;
+      height: 120px;
+      margin: 5px;
+      text-align: center;
+      line-height: 120px;
+      font-size: 14px;
+      cursor: pointer;
+      color: #fff;
+    }
+
+    .card-container {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    /* カードの背景色の条件ごとの設定 */
+    .card[data-number="1"],
+    .card[data-number="2"],
+    .card[data-number="3"],
+    .card[data-number="4"],
+    .card[data-number="5"] {
+      background-color: #7dcea0; /* 黄緑 */
+    }
+
+    .card[data-number="6"],
+    .card[data-number="7"],
+    .card[data-number="8"],
+    .card[data-number="9"],
+    .card[data-number="10"],
+    .card[data-number="11"],
+    .card[data-number="12"],
+    .card[data-number="13"],
+    .card[data-number="14"],
+    .card[data-number="15"],
+    .card[data-number="16"],
+    .card[data-number="17"] {
+      background-color: #a29bfe; /* 薄紫 */
+    }
+
+    .card[data-number="18"],
+    .card[data-number="19"],
+    .card[data-number="20"],
+    .card[data-number="21"],
+    .card[data-number="22"] {
+      background-color: #f1c40f; /* 薄黄色 */
+    }
+
+    .card[data-number="23"],
+    .card[data-number="24"],
+    .card[data-number="25"],
+    .card[data-number="26"],
+    .card[data-number="27"],
+    .card[data-number="28"],
+    .card[data-number="29"],
+    .card[data-number="30"],
+    .card[data-number="31"],
+    .card[data-number="32"],
+    .card[data-number="33"],
+    .card[data-number="34"],
+    .card[data-number="35"],
+    .card[data-number="36"],
+    .card[data-number="37"],
+    .card[data-number="38"],
+    .card[data-number="39"] {
+      background-color: #85c1e9; /* 薄水色 */
+    }
+
+    .card[data-number="40"],
+    .card[data-number="41"],
+    .card[data-number="42"],
+    .card[data-number="43"] {
+      background-color: #f39c12; /* 薄いオレンジ色 */
+    }
+
+    .card[data-number="44"],
+    .card[data-number="45"],
+    .card[data-number="46"],
+    .card[data-number="47"],
+    .card[data-number="48"],
+    .card[data-number="49"],
+    .card[data-number="50"],
+    .card[data-number="51"],
+    .card[data-number="52"],
+    .card[data-number="53"],
+    .card[data-number="54"],
+    .card[data-number="55"],
+    .card[data-number="56"],
+    .card[data-number="57"],
+    .card[data-number="58"],
+    .card[data-number="59"],
+    .card[data-number="60"],
+    .card[data-number="61"],
+    .card[data-number="62"],
+    .card[data-number="63"],
+    .card[data-number="64"],
+    .card[data-number="65"] {
+      background-color: #d2b4a9; /* 薄いベージュ */
+    }
+
+    .card[data-number="66"] {
+      background-color: #ea8685; /* 薄い赤 */
+    }
+  </style>
+  <title>カードゲーム</title>
+</head>
+<body>
+  <div class="card-container" id="card-container"></div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const cardContainer = document.getElementById('card-container');
+  
+      // カードの数
+      const cardCount = 66;
+
+      // 表示する単語の配列
+      const words = [
+        '创世纪', '出埃及记', '利未记', '民数记', '申命记', '约书亚记', '士师记', '路得记', '撒母耳记上', '撒母耳记下', '列王纪上', '列王纪下', '历代志上', '历代志下', '以斯拉记', '尼希米记', '以斯帖记', '约伯记', '诗篇', '箴言', '传道书', '雅歌', '以赛亚书', '耶利米书', '哀歌', '以西结书', '但以理书', '何西阿书', '约珥书', '阿摩司书', '俄巴底亚书', '约拿书', '弥迦书', '那鸿书', '哈巴谷书', '西番雅书', '哈该书', '撒迦利亚书', '玛拉基书','马太福音', '马可福音', '路加福音', '约翰福音', '使徒行传', '罗马书', '哥林多前书', '哥林多后书', '加拉太书', '以弗所书', '腓立比书', '歌罗西书', '帖撒罗尼迦前书', '帖撒罗尼迦后书', '提摩太前书', '提摩太后书', '提多书', '腓利门书', '希伯来书', '雅各书', '彼得前书', '彼得后书', '约翰一书', '约翰二书', '约翰三书', '犹大书', '启示录',
+      ];
+  
+      for (let i = 1; i <= cardCount; i++) {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.textContent = i;
+        card.dataset.number = i;
+        card.dataset.word = words[i - 1]; // インデックスは0から始まるため、iから1を引く
+  
+        card.addEventListener('click', function () {
+          flipCard(card, card.dataset.word);
+        });
+  
+        cardContainer.appendChild(card);
+      }
+  
+      function flipCard(card, word) {
+        card.classList.toggle('flipped');
+        card.textContent = card.classList.contains('flipped') ? word : card.dataset.number;
+      }
+    });
+  </script>
+</body>
+</html>
